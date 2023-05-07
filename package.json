@@ -11,7 +11,12 @@
     "pub": "npm publish"
   },
   "keywords": [],
-  "author": "",
+  "author": "ruihuag",
+  "bugs": "https://github.com/guanruihua/command-go/issues",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:guanruihua/command-go.git"
+  },
   "license": "ISC",
   "peerDependencies": {
     "enquirer": "^2.3.6"
