@@ -16,39 +16,40 @@ async function GitCommand(version = defaultVersion) {
 			name: 'Command',
 			message: 'Select Commands',
 			choices: [
-				{ name: 'New Branch', value: 'branch' },
-				{ name: 'Add Tag', value: 'tag' },
-				{ name: 'Not Commit', value: 'notCommit' },
-				{ name: 'Not Add', value: 'notAdd' },
-				{ name: 'Not Push', value: 'notPush' },
+				'New Branch',
+				'Add Tag',
+				'Not Commit',
+				'Not Add',
+				'Not Push',
 			],
 		})
 		// prompt.clear()
 		const res = await prompt.run()
+		console.log(res)
 		let branchName = getGitBranch() || 'main'
 		let tagName = ''
 
 		if (Array.isArray(res)) {
 
-			if (!res.includes('notAdd')) execSync('git add .')
+			if (!res.includes('Add Tag')) execSync('git add .')
 
-			if (!res.includes('notCommit')) {
+			if (!res.includes('Not Commit')) {
 				const commitMsg = await new Input({
 					message: 'Input Commit Message',
 				}).run();
 				execSync(`git commit -m ` + `"` + commitMsg + `"`)
 			}
 
-			if (res.includes('branch')) {
+			if (res.includes('New Branch')) {
 				branchName = await new Input({
 					message: 'Input Branch Name',
 					default: version,
 					initial: version,
 				}).run();
-				execSync('git branch -b ' + branchName)
+				execSync('git checkout -b ' + branchName)
 			}
 
-			if (res.includes('tag')) {
+			if (res.includes('Add Tag')) {
 				tagName = await new Input({
 					message: 'Input Tag Name',
 					default: 'v' + version,
@@ -57,7 +58,7 @@ async function GitCommand(version = defaultVersion) {
 				execSync('git tag ' + commitMsg)
 			}
 
-			if (!res.includes('notPush')) {
+			if (!res.includes('Not Push')) {
 				let command = 'git push -u origin'
 
 				if (branchName !== '') command += ' ' + branchName
