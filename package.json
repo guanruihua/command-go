@@ -1,7 +1,7 @@
 {
   "name": "command-go",
-  "version": "0.1.1",
-  "description": "",
+  "version": "0.1.2",
+  "description": "Common cmd Commands/Scripts",
   "module": "src/index.esm.js",
   "main": "src/index.js",
   "unpkg": "/src/",
