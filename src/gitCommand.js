@@ -46,7 +46,7 @@ async function GitCommand(version = defaultVersion) {
 					default: version,
 					initial: version,
 				}).run();
-				execSync('git branch -b ' + branchName)
+				execSync('git checkout -b ' + branchName)
 			}
 
 			if (res.includes('Add Tag')) {
