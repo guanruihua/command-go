@@ -36,7 +36,7 @@ async function GitCommand(version = defaultVersion) {
 				const commitMsg = await new Input({
 					message: 'Input Commit Message',
 				}).run();
-				execSync(`git commit -m +` + `"` + commitMsg + `"`)
+				execSync(`git commit -m ` + `"` + commitMsg + `"`)
 			}
 
 			if (res.includes('branch')) {
