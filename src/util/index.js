@@ -12,10 +12,8 @@ module.exports.getGitBranch = function () {
 
 module.exports.getPackage = function () {
 	try {
-		const res = require(path.resolve(process.cwd(), 'package.json'))
-		res.version = pkg.version
-		return res
+		return require(path.resolve(process.cwd(), 'package.json')) || {}
 	} catch (error) {
-		return pkg
+		return {}
 	}
 }

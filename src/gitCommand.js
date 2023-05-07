@@ -1,5 +1,5 @@
 const __execSync = require('child_process').execSync
-const { getGitBranch } = require('./util')
+const { getGitBranch, getPackage } = require('./util')
 const { MultiSelect, Input } = require('enquirer')
 
 const execSync = (command) => {
@@ -7,7 +7,9 @@ const execSync = (command) => {
 	__execSync(command)
 }
 
-async function GitCommand(version = '0.0.1') {
+const defaultVersion = getPackage().version || '0.0.1'
+
+async function GitCommand(version = defaultVersion) {
 	try {
 
 		const prompt = await new MultiSelect({
@@ -40,7 +42,8 @@ async function GitCommand(version = '0.0.1') {
 			if (res.includes('branch')) {
 				branchName = await new Input({
 					message: 'Input Branch Name',
-					default: version
+					default: version,
+					initial: version,
 				}).run();
 				execSync('git branch -b ' + branchName)
 			}
@@ -48,7 +51,8 @@ async function GitCommand(version = '0.0.1') {
 			if (res.includes('tag')) {
 				tagName = await new Input({
 					message: 'Input Tag Name',
-					default: 'v' + version
+					default: 'v' + version,
+					initial: 'v' + version,
 				}).run();
 				execSync('git tag ' + commitMsg)
 			}

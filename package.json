@@ -1,6 +1,6 @@
 {
   "name": "command-go",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "",
   "module": "src/index.esm.js",
   "main": "src/index.js",
