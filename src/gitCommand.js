@@ -1,4 +1,5 @@
 const __execSync = require('child_process').execSync
+const { getGitBranch } = require('./util')
 const { MultiSelect, Input } = require('enquirer')
 
 const execSync = (command) => {
@@ -22,7 +23,7 @@ async function GitCommand(version = '0.0.1') {
 		})
 		// prompt.clear()
 		const res = await prompt.run()
-		let branchName = ''
+		let branchName = getGitBranch() || 'main'
 		let tagName = ''
 
 		if (Array.isArray(res)) {
